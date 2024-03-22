@@ -14,6 +14,9 @@ public class Card
     private BufferedImage image;
     private Rectangle cardBox;
     private boolean highlight;
+    private boolean eliminated;
+    private static ArrayList<Card> usedCards = new ArrayList<Card>();
+    private static int cardsLeft = 52;
 
     public Card(String suit, String value)
     {
@@ -25,6 +28,7 @@ public class Card
         this.image = readImage();
         this.cardBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
         this.highlight = false;
+        this.eliminated = false;
     }
 
     public Rectangle getCardBox()
@@ -125,6 +129,7 @@ public class Card
             int r = (int)(Math.random()*deck.size());
             Card c = deck.remove(r);
             hand.add(c);
+            usedCards.add(c);
         }
         return hand;
     }
